@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أسد الدين صلاح وهبه | مطوّر مواقع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#070b0f;
+    --bg-1:#0d1319;
+    --bg-2:#121a22;
+    --line:#1c2830;
+    --cyan:#2fe0e8;
+    --cyan-dim:#12525a;
+    --cyan-glow:rgba(47,224,232,.18);
+    --amber:#ff9a4d;
+    --text-0:#eaf4f5;
+    --text-1:#9fb3ba;
+    --text-2:#5c717a;
+    --radius:14px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-0);
+    color:var(--text-0);
+    font-family:'Tajawal',sans-serif;
+    overflow-x:hidden;
+    line-height:1.7;
+    transition:font-family .2s;
+  }
+  h1,h2,h3,.logo,.typed-wrap{font-family:'Cairo',sans-serif;}
+  body.lang-en{font-family:'Inter',sans-serif;}
+  body.lang-en h1, body.lang-en h2, body.lang-en h3, body.lang-en .logo{font-family:'Poppins',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background:
+      radial-gradient(circle at 15% 10%, var(--cyan-glow), transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(255,154,77,.08), transparent 35%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  section{position:relative; z-index:1; padding:110px 8vw;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.8rem; letter-spacing:.08em;
+    color:var(--cyan); margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--cyan);}
+  h2.section-title{
+    font-size:clamp(1.8rem,3.4vw,2.6rem);
+    font-weight:800;
+    margin-bottom:44px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; inset-inline:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 8vw;
+    background:rgba(7,11,15,.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    gap:20px;
+  }
+  .logo{
+    font-weight:800; font-size:1.15rem; color:var(--text-0);
+    display:flex; align-items:center; gap:6px;
+    white-space:nowrap;
+  }
+  .logo span{color:var(--cyan);}
+  .nav-right{display:flex; align-items:center; gap:26px;}
+  nav ul{display:flex; gap:34px; font-size:.95rem; font-weight:500;}
+  nav a{position:relative; color:var(--text-1); transition:.25s;}
+  nav a:hover{color:var(--text-0);}
+  nav a::after{
+    content:''; position:absolute; inset-inline-start:0; bottom:-6px;
+    width:0; height:1px; background:var(--cyan); transition:.3s;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .nav-toggle span{width:24px; height:2px; background:var(--text-0);}
+  .lang-btn{
+    font-family:'JetBrains Mono',monospace; font-size:.8rem; font-weight:600;
+    border:1px solid var(--line); color:var(--cyan); background:var(--bg-1);
+    padding:8px 14px; border-radius:8px; cursor:pointer; transition:.25s;
+  }
+  .lang-btn:hover{border-color:var(--cyan); box-shadow:0 0 16px var(--cyan-glow);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:140px;
+    gap:60px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:60px; width:100%; align-items:center;
+  }
+  .hero-copy p.hello{
+    font-family:'JetBrains Mono',monospace; color:var(--cyan); font-size:.95rem; margin-bottom:16px;
+  }
+  .hero-copy h1{
+    font-size:clamp(2.3rem,5vw,3.8rem);
+    font-weight:900; line-height:1.2; margin-bottom:14px;
+  }
+  .hero-copy h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--cyan),#7cf3f8);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .typed-wrap{
+    font-family:'JetBrains Mono',monospace;
+    font-size:clamp(1.1rem,2.2vw,1.4rem);
+    color:var(--text-1); margin-bottom:22px; min-height:34px;
+  }
+  .typed-wrap .cursor{color:var(--cyan); animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero-copy .desc{color:var(--text-1); max-width:520px; margin-bottom:34px; font-size:1.02rem;}
+  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 26px; border-radius:10px; font-weight:700; font-size:.95rem;
+    transition:.25s; border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--cyan); color:#04181a;}
+  .btn-primary:hover{box-shadow:0 0 26px var(--cyan-glow); transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--line); color:var(--text-0);}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+
+  .terminal{
+    background:var(--bg-1);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(47,224,232,.04);
+    overflow:hidden;
+    transform:perspective(900px) rotateY(-6deg) rotateX(2deg);
+    transition:transform .5s;
+  }
+  .terminal:hover{transform:perspective(900px) rotateY(-2deg) rotateX(0deg);}
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px; background:var(--bg-2); border-bottom:1px solid var(--line);
+  }
+  .term-bar span{width:11px; height:11px; border-radius:50%;}
+  .term-bar span:nth-child(1){background:#ff5f57;}
+  .term-bar span:nth-child(2){background:#febc2e;}
+  .term-bar span:nth-child(3){background:#28c840;}
+  .term-title{margin-inline-start:12px; font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--text-2);}
+  .term-body{padding:26px; font-family:'JetBrains Mono',monospace; font-size:.88rem; direction:ltr; text-align:left; color:var(--text-1); min-height:260px;}
+  .term-body .kw{color:#ff9a4d;}
+  .term-body .str{color:var(--cyan);}
+  .term-body .fn{color:#c792ea;}
+  .term-body .cm{color:var(--text-2);}
+  .line-num{display:inline-block; width:22px; color:var(--text-2); user-select:none;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:center;}
+  .avatar-frame{
+    width:100%; aspect-ratio:1/1; max-width:340px;
+    border-radius:22px; border:1px solid var(--line);
+    background:linear-gradient(155deg, var(--bg-2), var(--bg-1));
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .avatar-frame::before{
+    content:'</>'; font-family:'JetBrains Mono',monospace; font-weight:600;
+    font-size:5rem; color:var(--cyan-dim);
+  }
+  .avatar-frame::after{
+    content:''; position:absolute; inset:-2px; border-radius:22px;
+    background:conic-gradient(from 0deg, transparent, var(--cyan-glow), transparent 30%);
+    animation:spin 6s linear infinite;
+    z-index:-1;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .about-text p{color:var(--text-1); margin-bottom:22px; font-size:1.03rem;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:10px;}
+  .chip{
+    padding:9px 18px; border:1px solid var(--line); border-radius:999px;
+    font-size:.85rem; color:var(--text-1); background:var(--bg-1);
+  }
+  .chip::before{content:'✦ '; color:var(--cyan);}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .skill-card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 26px; background:var(--bg-1);
+    transition:.3s;
+  }
+  .skill-card:hover{border-color:var(--cyan-dim); transform:translateY(-6px); box-shadow:0 20px 40px -20px rgba(0,0,0,.6);}
+  .skill-card h3{font-size:1.05rem; margin-bottom:20px; color:var(--text-0); display:flex; align-items:center; gap:10px;}
+  .skill-card h3::before{content:''; width:8px; height:8px; border-radius:2px; background:var(--cyan); display:inline-block; transform:rotate(45deg);}
+  .skill-list{display:flex; flex-direction:column; gap:14px;}
+  .skill-item{display:flex; justify-content:space-between; align-items:center; font-size:.92rem; color:var(--text-1);}
+  .bar{flex:1; height:5px; background:var(--bg-2); border-radius:4px; margin:0 14px; overflow:hidden;}
+  .bar i{display:block; height:100%; background:linear-gradient(90deg,var(--cyan-dim),var(--cyan)); border-radius:4px; width:0; transition:width 1.2s ease;}
+  .skill-item.reveal .bar i{width:var(--w);}
+
+  /* ---------- PROJECTS ---------- */
+  .section-sub{color:var(--text-1); max-width:640px; margin-top:-24px; margin-bottom:44px; font-size:1rem;}
+  .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
+  .project-card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--bg-1); overflow:hidden; transition:.3s;
+    display:flex; flex-direction:column;
+  }
+  .project-card:hover{border-color:var(--cyan-dim); transform:translateY(-6px); box-shadow:0 24px 46px -22px rgba(0,0,0,.65);}
+  .project-visual{
+    height:190px; background:var(--bg-2); border-bottom:1px solid var(--line);
+    padding:16px; position:relative; overflow:hidden;
+  }
+  .pv-dots{display:flex; gap:6px; margin-bottom:14px;}
+  .pv-dots span{width:9px; height:9px; border-radius:50%; background:var(--line);}
+  .pv-dots span:nth-child(1){background:#ff5f57;}
+  .pv-dots span:nth-child(2){background:#febc2e;}
+  .pv-dots span:nth-child(3){background:#28c840;}
+
+  /* dashboard mockup */
+  .pv-dashboard{display:flex; gap:10px; height:130px;}
+  .pv-dashboard .side{width:24%; background:var(--bg-0); border-radius:6px; border:1px solid var(--line);}
+  .pv-dashboard .main{flex:1; display:grid; grid-template-rows:1fr 1fr; gap:8px;}
+  .pv-dashboard .row{display:flex; gap:8px; height:100%;}
+  .pv-dashboard .card{flex:1; border-radius:6px; background:var(--bg-0); border:1px solid var(--line); position:relative; overflow:hidden;}
+  .pv-dashboard .card::after{content:'';position:absolute; inset-inline:8px; bottom:8px; height:4px; border-radius:3px; background:var(--cyan-dim);}
+  .pv-dashboard .card.a::after{background:var(--cyan);}
+  .pv-dashboard .card.b::after{width:60%; background:var(--amber);}
+
+  /* ecommerce mockup */
+  .pv-ecom{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; height:130px;}
+  .pv-ecom .item{background:var(--bg-0); border:1px solid var(--line); border-radius:6px; display:flex; flex-direction:column; justify-content:flex-end; padding:6px; gap:5px;}
+  .pv-ecom .item .swatch{flex:1; border-radius:4px; background:linear-gradient(155deg,var(--cyan-dim),transparent);}
+  .pv-ecom .item .price{height:5px; width:50%; border-radius:3px; background:var(--cyan);}
+
+  /* landing mockup */
+  .pv-landing{height:130px; display:flex; flex-direction:column; gap:10px; justify-content:center;}
+  .pv-landing .bar-lg{height:14px; width:70%; border-radius:4px; background:var(--text-0); opacity:.85;}
+  .pv-landing .bar-sm{height:8px; width:45%; border-radius:4px; background:var(--text-2);}
+  .pv-landing .cta{margin-top:6px; height:22px; width:110px; border-radius:6px; background:var(--cyan);}
+
+  /* terminal mockup (small) */
+  .pv-script{height:130px; font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--text-1); direction:ltr; text-align:left; line-height:1.9;}
+  .pv-script .kw{color:var(--amber);}
+  .pv-script .str{color:var(--cyan);}
+  .pv-script .cm{color:var(--text-2);}
+
+  .project-info{padding:22px 24px 26px; display:flex; flex-direction:column; gap:12px; flex:1;}
+  .project-info h3{font-size:1.08rem; color:var(--text-0);}
+  .project-info p{font-size:.92rem; color:var(--text-1);}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:.72rem;
+    padding:4px 10px; border-radius:6px; border:1px solid var(--line); color:var(--text-1);
+  }
+  .project-link{
+    display:inline-flex; align-items:center; gap:6px; color:var(--cyan); font-size:.88rem; font-weight:600; margin-top:6px;
+  }
+  .project-link:hover{text-decoration:underline;}
+  .note-box{
+    margin-top:36px; border:1px dashed var(--line); border-radius:10px;
+    padding:16px 20px; color:var(--text-2); font-size:.85rem; text-align:center;
+  }
+
+  @media (max-width:800px){
+    .projects-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{ text-align:center; max-width:820px; margin:0 auto; }
+  .contact-wrap p{color:var(--text-1); margin-bottom:44px; font-size:1.05rem;}
+  .contact-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .contact-card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 20px; background:var(--bg-1);
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    transition:.3s;
+  }
+  .contact-card:hover{border-color:var(--cyan); transform:translateY(-6px);}
+  .contact-card .icon{
+    width:50px; height:50px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg-2); border:1px solid var(--line); color:var(--cyan);
+  }
+  .contact-card span.label{font-weight:700; font-size:.95rem;}
+  .contact-card small{color:var(--text-2); font-family:'JetBrains Mono',monospace; font-size:.78rem;}
+
+  footer{
+    text-align:center; padding:34px 8vw; border-top:1px solid var(--line);
+    color:var(--text-2); font-size:.85rem;
+  }
+  footer span{color:var(--cyan);}
+
+  .reveal-el{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal-el.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  @media (max-width:1000px){
+    .contact-cards{grid-template-columns:repeat(2,1fr);}
+  }
+
+  @media (max-width:900px){
+    .hero-grid, .about-grid{grid-template-columns:1fr;}
+    .terminal{order:-1; transform:none;}
+    .skills-grid{grid-template-columns:1fr;}
+    nav ul{
+      position:fixed; top:70px; inset-inline:0;
+      flex-direction:column; align-items:center; gap:22px;
+      background:var(--bg-1); padding:30px 0; border-bottom:1px solid var(--line);
+      transform:translateY(-130%); transition:.35s;
+    }
+    nav ul.open{transform:translateY(0);}
+    .nav-toggle{display:flex;}
+  }
+
+  @media (max-width:560px){
+    .contact-cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">&lt;<span data-ar="أسد" data-en="Asd">أسد</span>/&gt;</div>
+  <div class="nav-right">
+    <nav>
+      <ul id="navList">
+        <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="#about" data-ar="عني" data-en="About">عني</a></li>
+        <li><a href="#skills" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+        <li><a href="#projects" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
+        <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+      </ul>
+    </nav>
+    <button class="lang-btn" id="langToggle">EN</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="hello" data-ar="// مرحباً، اسمي" data-en="// Hi, my name is">// مرحباً، اسمي</p>
+      <h1 data-ar-html='أسد الدين صلاح <em>وهبه</em>' data-en-html='Asdaldeen Salah <em>Wahba</em>'>أسد الدين صلاح <em>وهبه</em></h1>
+      <div class="typed-wrap"><span id="typed"></span><span class="cursor">|</span></div>
+      <p class="desc" data-ar="بحوّل الأفكار لمواقع شغالة كويس وشكلها مرتب. بشتغل على تطوير الواجهات وربطها بأدوات زي Python وBootstrap، ومتمكن كمان من Word وCanva لأي شغل تصميم أو مستندات محتاجها المشروع." data-en="I turn ideas into clean, well-built websites. I work on front-end development and connect it with tools like Python and Bootstrap, and I'm also skilled with Word and Canva for any design or documentation a project needs.">
+        بحوّل الأفكار لمواقع شغالة كويس وشكلها مرتب. بشتغل على تطوير الواجهات وربطها بأدوات
+        زي Python وBootstrap، ومتمكن كمان من Word وCanva لأي شغل تصميم أو مستندات محتاجها المشروع.
+      </p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary" data-ar="تواصل معايا" data-en="Get in touch">تواصل معايا</a>
+        <a href="#projects" class="btn btn-ghost" data-ar="شوف مشاريعي" data-en="See my projects">شوف مشاريعي</a>
+        <a href="#" id="cvBtn" class="btn btn-ghost" data-ar="⬇ تحميل السيرة الذاتية" data-en="⬇ Download CV">⬇ تحميل السيرة الذاتية</a>
+      </div>
+    </div>
+
+    <div class="terminal reveal-el">
+      <div class="term-bar">
+        <span></span><span></span><span></span>
+        <div class="term-title">developer.js</div>
+      </div>
+      <div class="term-body">
+<span class="line-num">1</span><span class="kw">const</span> developer = {<br>
+<span class="line-num">2</span>&nbsp;&nbsp;name: <span class="str">"Asdaldeen Salah Wahba"</span>,<br>
+<span class="line-num">3</span>&nbsp;&nbsp;role: <span class="str">"Web Developer"</span>,<br>
+<span class="line-num">4</span>&nbsp;&nbsp;stack: [<span class="str">"HTML"</span>, <span class="str">"CSS"</span>, <span class="str">"JS"</span>, <span class="str">"Python"</span>],<br>
+<span class="line-num">5</span>&nbsp;&nbsp;tools: [<span class="str">"Bootstrap"</span>, <span class="str">"Canva"</span>, <span class="str">"Word"</span>],<br>
+<span class="line-num">6</span>&nbsp;&nbsp;<span class="fn">available</span>: <span class="kw">true</span><br>
+<span class="line-num">7</span>};<br><br>
+<span class="line-num">8</span><span class="cm" data-ar="// شغلي بيتكلم أكتر مني 🙂" data-en="// My work speaks for itself 🙂">// شغلي بيتكلم أكتر مني 🙂</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <p class="eyebrow" data-ar="عني" data-en="About">عني</p>
+  <h2 class="section-title" data-ar="نبذة سريعة" data-en="Quick Intro">نبذة سريعة</h2>
+  <div class="about-grid">
+    <div class="avatar-frame reveal-el"></div>
+    <div class="about-text reveal-el">
+      <p data-ar="أنا أسد الدين، مطوّر مواقع وبرمجه، مهتم ببناء واجهات نظيفة وسهلة الاستخدام، وبحب أفهم تفاصيل أي مشروع كويس قبل ما أبدأ فيه." data-en="I'm Asdaldeen, a web developer and programmer interested in building clean, easy-to-use interfaces. I like to fully understand a project's details before I start building.">
+        أنا أسد الدين، مطوّر مواقع وبرمجه، مهتم ببناء واجهات نظيفة وسهلة الاستخدام،
+        وبحب أفهم تفاصيل أي مشروع كويس قبل ما أبدأ فيه.
+      </p>
+      <p data-ar="بستخدم HTML وCSS وJavaScript في بناء الواجهات، وPython وBootstrap لتوسيع إمكانيات الشغل، وفي نفس الوقت متمكن من Word وCanva لأي محتوى أو مستند بصري محتاجه المشروع. هدفي دايمًا إني أسلّم شغل مضبوط وفي وقته." data-en="I use HTML, CSS and JavaScript to build interfaces, and Python and Bootstrap to extend what I can deliver. I'm also comfortable with Word and Canva for any visual content or document a project needs. My goal is always to deliver solid work, on time.">
+        بستخدم HTML وCSS وJavaScript في بناء الواجهات، وPython وBootstrap لتوسيع إمكانيات
+        الشغل، وفي نفس الوقت متمكن من Word وCanva لأي محتوى أو مستند بصري محتاجه المشروع.
+        هدفي دايمًا إني أسلّم شغل مضبوط وفي وقته.
+      </p>
+      <div class="chip-row">
+        <span class="chip" data-ar="شغف بالتفاصيل" data-en="Detail-oriented">شغف بالتفاصيل</span>
+        <span class="chip" data-ar="تعلّم مستمر" data-en="Always learning">تعلّم مستمر</span>
+        <span class="chip" data-ar="حل المشكلات" data-en="Problem solver">حل المشكلات</span>
+        <span class="chip" data-ar="التزام بالمواعيد" data-en="Reliable & on time">التزام بالمواعيد</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="eyebrow" data-ar="المهارات" data-en="Skills">المهارات</p>
+  <h2 class="section-title" data-ar="أدوات وتقنيات بشتغل بيها" data-en="Tools & technologies I work with">أدوات وتقنيات بشتغل بيها</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card reveal-el">
+      <h3 data-ar="تطوير الواجهات" data-en="Front-End Development">تطوير الواجهات</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>HTML5</span><span class="bar"><i style="--w:92%"></i></span><span>92%</span></div>
+        <div class="skill-item"><span>CSS3</span><span class="bar"><i style="--w:88%"></i></span><span>88%</span></div>
+        <div class="skill-item"><span>JavaScript</span><span class="bar"><i style="--w:80%"></i></span><span>80%</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal-el">
+      <h3 data-ar="لغات وأدوات" data-en="Languages & Tools">لغات وأدوات</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>Python</span><span class="bar"><i style="--w:75%"></i></span><span>75%</span></div>
+        <div class="skill-item"><span>Bootstrap</span><span class="bar"><i style="--w:82%"></i></span><span>82%</span></div>
+        <div class="skill-item"><span>Git & GitHub</span><span class="bar"><i style="--w:70%"></i></span><span>70%</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal-el">
+      <h3 data-ar="تصميم ومستندات" data-en="Design & Documents">تصميم ومستندات</h3>
+      <div class="skill-list">
+        <div class="skill-item"><span>Canva</span><span class="bar"><i style="--w:85%"></i></span><span>85%</span></div>
+        <div class="skill-item"><span>Microsoft Word</span><span class="bar"><i style="--w:90%"></i></span><span>90%</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <p class="eyebrow" data-ar="مشاريعي" data-en="Projects">مشاريعي</p>
+  <h2 class="section-title" data-ar="نماذج من نوعية الشغل اللي بقدمها" data-en="Examples of the kind of work I build">نماذج من نوعية الشغل اللي بقدمها</h2>
+  <p class="section-sub" data-ar="دي نماذج توضيحية بتعكس المهارات والأدوات اللي بشتغل بيها — تقدر تتفرج عليها كفكرة عن أسلوب الشغل، وهتتحدث بمشاريع حقيقية أول ما تتسلم." data-en="These are concept previews that reflect the skills and tools I work with — a sense of style and quality, to be replaced with real client work as projects are delivered.">
+    دي نماذج توضيحية بتعكس المهارات والأدوات اللي بشتغل بيها — تقدر تتفرج عليها كفكرة عن أسلوب الشغل، وهتتحدث بمشاريع حقيقية أول ما تتسلم.
+  </p>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal-el">
+      <div class="project-visual">
+        <div class="pv-dots"><span></span><span></span><span></span></div>
+        <div class="pv-dashboard">
+          <div class="side"></div>
+          <div class="main">
+            <div class="row"><div class="card a"></div><div class="card"></div></div>
+            <div class="row"><div class="card b"></div><div class="card"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3 data-ar="لوحة تحكم إدارية" data-en="Admin Dashboard">لوحة تحكم إدارية</h3>
+        <p data-ar="واجهة تحكم بتعرض الإحصائيات والبيانات بشكل مرتب وسهل القراءة، مبنية بـ HTML وCSS وJavaScript." data-en="A control-panel interface that presents stats and data cleanly, built with HTML, CSS and JavaScript.">واجهة تحكم بتعرض الإحصائيات والبيانات بشكل مرتب وسهل القراءة، مبنية بـ HTML وCSS وJavaScript.</p>
+        <div class="tag-row">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+        </div>
+        <a href="#" class="project-link" data-ar="عرض التفاصيل →" data-en="View details →">عرض التفاصيل →</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal-el">
+      <div class="project-visual">
+        <div class="pv-dots"><span></span><span></span><span></span></div>
+        <div class="pv-ecom">
+          <div class="item"><div class="swatch"></div><div class="price"></div></div>
+          <div class="item"><div class="swatch"></div><div class="price"></div></div>
+          <div class="item"><div class="swatch"></div><div class="price"></div></div>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3 data-ar="متجر إلكتروني" data-en="E-Commerce Storefront">متجر إلكتروني</h3>
+        <p data-ar="صفحة عرض منتجات متجاوبة مع تصميم Bootstrap، مناسبة لمتاجر صغيرة وكتالوجات المنتجات." data-en="A responsive product-showcase page built with Bootstrap, suited to small stores and product catalogs.">صفحة عرض منتجات متجاوبة مع تصميم Bootstrap، مناسبة لمتاجر صغيرة وكتالوجات المنتجات.</p>
+        <div class="tag-row">
+          <span class="tag">Bootstrap</span><span class="tag">HTML</span><span class="tag">CSS</span>
+        </div>
+        <a href="#" class="project-link" data-ar="عرض التفاصيل →" data-en="View details →">عرض التفاصيل →</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal-el">
+      <div class="project-visual">
+        <div class="pv-dots"><span></span><span></span><span></span></div>
+        <div class="pv-landing">
+          <div class="bar-lg"></div>
+          <div class="bar-sm"></div>
+          <div class="cta"></div>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3 data-ar="صفحة هبوط تسويقية" data-en="Marketing Landing Page">صفحة هبوط تسويقية</h3>
+        <p data-ar="صفحة تعريفية بمنتج أو خدمة، مصممة بأسلوب بصري بسيط وواضح لزيادة نسبة التفاعل." data-en="A one-page introduction for a product or service, designed with a clear, simple visual style to boost engagement.">صفحة تعريفية بمنتج أو خدمة، مصممة بأسلوب بصري بسيط وواضح لزيادة نسبة التفاعل.</p>
+        <div class="tag-row">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Canva</span>
+        </div>
+        <a href="#" class="project-link" data-ar="عرض التفاصيل →" data-en="View details →">عرض التفاصيل →</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal-el">
+      <div class="project-visual">
+        <div class="pv-dots"><span></span><span></span><span></span></div>
+        <div class="pv-script">
+<span class="kw">import</span> os<br>
+<span class="kw">def</span> organize_files(path):<br>
+&nbsp;&nbsp;<span class="cm"># ترتيب الملفات تلقائيًا</span><br>
+&nbsp;&nbsp;<span class="kw">for</span> f <span class="kw">in</span> os.listdir(path):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;move(f, <span class="str">"sorted/"</span>)
+        </div>
+      </div>
+      <div class="project-info">
+        <h3 data-ar="أداة أتمتة بـ Python" data-en="Python Automation Tool">أداة أتمتة بـ Python</h3>
+        <p data-ar="سكريبت بسيط بيوفر الوقت من خلال تنفيذ مهام متكررة زي ترتيب الملفات تلقائيًا." data-en="A simple script that saves time by handling repetitive tasks, like automatically organizing files.">سكريبت بسيط بيوفر الوقت من خلال تنفيذ مهام متكررة زي ترتيب الملفات تلقائيًا.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Automation</span>
+        </div>
+        <a href="#" class="project-link" data-ar="عرض التفاصيل →" data-en="View details →">عرض التفاصيل →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note-box" data-ar="* دي نماذج تصميمية لتوضيح الأسلوب، مش مشاريع عملاء فعلية — تقدر تستبدلها بصور ومشاريعك الحقيقية في أي وقت." data-en="* These are design concepts to demonstrate style, not real client projects — swap them for your actual project screenshots any time.">
+    * دي نماذج تصميمية لتوضيح الأسلوب، مش مشاريع عملاء فعلية — تقدر تستبدلها بصور ومشاريعك الحقيقية في أي وقت.
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <p class="eyebrow" style="justify-content:center;" data-ar="تواصل" data-en="Contact">تواصل</p>
+    <h2 class="section-title" data-ar="لنشتغل مع بعض" data-en="Let's work together">لنشتغل مع بعض</h2>
+    <p data-ar="متاح للعمل الحر والتعاون في مشاريع جديدة، تقدر توصلي من أي حتة تحت." data-en="Available for freelance work and new projects — reach me through any of the links below.">متاح للعمل الحر والتعاون في مشاريع جديدة، تقدر توصلي من أي حتة تحت.</p>
+    <div class="contact-cards">
+
+      <a class="contact-card reveal-el" href="https://www.linkedin.com/in/asd-eldin-salah-a7168541b" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-4V9z"/></svg>
+        </div>
+        <span class="label">LinkedIn</span>
+        <small>asd-eldin-salah</small>
+      </a>
+
+      <a class="contact-card reveal-el" href="https://www.facebook.com/share/1BQ8eqbqjp/" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.5-3.5h-3V7.7c0-1 .3-1.7 1.7-1.7H16V2.9C15.7 2.9 14.7 2.8 13.6 2.8c-2.3 0-3.9 1.4-3.9 4v2.2H7v3.5h2.7V21h3.8z"/></svg>
+        </div>
+        <span class="label">Facebook</span>
+        <small data-ar="الصفحة الشخصية" data-en="Personal profile">الصفحة الشخصية</small>
+      </a>
+
+      <a class="contact-card reveal-el" href="https://wa.me/201119338830" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1s-.6.8-.7.9c-.1.1-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4L9.7 8c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.4.1.2 1.6 2.5 4 3.4.6.2 1 .4 1.3.5.6.2 1 .1 1.4-.1.4-.2 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
+        </div>
+        <span class="label">WhatsApp</span>
+        <small dir="ltr">+201119338830</small>
+      </a>
+
+      <a class="contact-card reveal-el" href="https://www.tiktok.com/@asodah_yasta_" target="_blank" rel="noopener" id="tiktokCard">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-1-.9-1.6-2.2-1.6-3.62h-3.2v13.4a2.6 2.6 0 1 1-1.83-2.48V9.9a5.8 5.8 0 1 0 5.03 5.75V9.4a7.2 7.2 0 0 0 4.2 1.34V7.54a4.3 4.3 0 0 1-2.6-1.72z"/></svg>
+        </div>
+        <span class="label">TikTok</span>
+        <small data-ar="تابعني على تيك توك" data-en="Follow me on TikTok">تابعني على تيك توك</small>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 <span>أسد الدين صلاح وهبه</span> — <span data-ar="تم البناء بشغف 💻" data-en="Built with passion 💻">تم البناء بشغف 💻</span>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  toggle.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  const ROLES = {
+    ar: ["مطوّر مواقع", "مبرمج Front-End", "شغوف بالتكنولوجيا"],
+    en: ["Web Developer", "Front-End Programmer", "Tech Enthusiast"]
+  };
+  const typedEl = document.getElementById('typed');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let currentLang = 'ar';
+  let typingGen = 0;
+
+  function resetTyping(){
+    typingGen++;
+    const gen = typingGen;
+    const roles = ROLES[currentLang];
+    let ri = 0, ci = 0, deleting = false;
+    typedEl.textContent = '';
+    if(prefersReduced){ typedEl.textContent = roles[0]; return; }
+    function loop(){
+      if(gen !== typingGen) return;
+      const current = roles[ri];
+      if(!deleting){
+        ci++;
+        typedEl.textContent = current.slice(0, ci);
+        if(ci === current.length){ deleting = true; setTimeout(loop, 1400); return; }
+      } else {
+        ci--;
+        typedEl.textContent = current.slice(0, ci);
+        if(ci === 0){ deleting = false; ri = (ri + 1) % roles.length; }
+      }
+      setTimeout(loop, deleting ? 45 : 85);
+    }
+    loop();
+  }
+
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.querySelectorAll('[data-ar]').forEach(el => { el.textContent = el.dataset[lang]; });
+    document.querySelectorAll('[data-ar-html]').forEach(el => { el.innerHTML = el.dataset[lang + 'Html']; });
+    document.getElementById('langToggle').textContent = lang === 'ar' ? 'EN' : 'AR';
+    resetTyping();
+  }
+
+  document.getElementById('cvBtn').addEventListener('click', (e) => {
+    if(document.getElementById('cvBtn').getAttribute('href') === '#'){
+      e.preventDefault();
+      alert(currentLang === 'ar' ? 'ملف السيرة الذاتية هيتضاف قريب' : 'CV file coming soon');
+    }
+  });
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    applyLang(currentLang === 'ar' ? 'en' : 'ar');
+  });
+
+  applyLang('ar');
+
+  const els = document.querySelectorAll('.reveal-el, .skill-item');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in', 'reveal'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
